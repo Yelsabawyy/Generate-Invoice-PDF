@@ -39,37 +39,36 @@ export default function CreateInvoiceForm({
 }: {
   generatePDF: () => void;
 }) {
-  const {invoices :InvoiceData} = useInvoiceStore();
+  const { invoices: InvoiceData } = useInvoiceStore();
 
-const {
-  register,
-  control,
-  handleSubmit,
-  formState: { errors },
-  watch,
-} = useForm<InvoiceFormType>({
-  resolver: zodResolver(invoiceSchema),
-  defaultValues: InvoiceData && InvoiceData.length > 0
-    ? InvoiceData[InvoiceData.length - 1] // last saved invoice
-    : {
-        invoiceId: "",
-        invoiceDate: "",
-        companyName: "",
-        companyAddress: "",
-        companyPhone: "",
-        companyTaxId: "",
-        clientName: "",
-        clientAddress: "",
-        clientPhone: "",
-        clientTaxId: "",
-        taxRate: 0,
-        discountAmount: 0,
-        shippingCharges: 0,
-        paymentMethods: "",
-        items: [{ description: "", quantity: 1, unitPrice: 0 }],
-      },
-});
-
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<InvoiceFormType>({
+    resolver: zodResolver(invoiceSchema),
+    defaultValues: InvoiceData
+      ? InvoiceData
+      : {
+          invoiceId: "",
+          invoiceDate: "",
+          companyName: "",
+          companyAddress: "",
+          companyPhone: "",
+          companyTaxId: "",
+          clientName: "",
+          clientAddress: "",
+          clientPhone: "",
+          clientTaxId: "",
+          taxRate: 0,
+          discountAmount: 0,
+          shippingCharges: 0,
+          paymentMethods: "",
+          items: [{ description: "", quantity: 1, unitPrice: 0 }],
+        },
+  });
 
   const { fields, append, remove } = useFieldArray({
     control,

@@ -13,7 +13,7 @@ export default function Page() {
   };
 
   return showPreview ? (
-    <Invoice />
+    <Invoice showPreview={showPreview} setShowPreview={setShowPreview} />
   ) : (
     <CreateInvoiceForm generatePDF={generatePDF} />
   );
